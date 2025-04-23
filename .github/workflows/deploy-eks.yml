@@ -34,17 +34,17 @@ jobs:
           terraform_version: 1.6.6
 
       - name: Inicializar Terraform
-        working-directory: ./cell-a
+        working-directory: terraform/cell-a
         run: terraform init
 
       - name: Validar Terraform
-        working-directory: ./cell-a
+        working-directory: terraform/cell-a
         run: terraform validate
 
       - name: Plano Terraform
-        working-directory: ./cell-a
+        working-directory: terraform/cell-a
         run: terraform plan -out=tfplan
 
       - name: Aplicar Terraform
-        working-directory: ./cell-a
+        working-directory: terraform/cell-a
         run: terraform apply -auto-approve tfplan
