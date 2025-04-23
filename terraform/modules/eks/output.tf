@@ -25,7 +25,3 @@ output "cluster_arn" {
 output "node_group_role_arn" {
   value = module.eks.eks_managed_node_groups["default"].iam_role_arn
 }
-
-output "kms_key_arn" {
-  value = "arn:aws:kms:us-east-2:931157493096:key/34a394e3-fafd-4b7f-a1ba-2fc8a77ed4e7"
-}
