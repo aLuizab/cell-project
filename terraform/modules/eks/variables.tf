@@ -54,3 +54,7 @@ variable "cell_name" {
   type        = string
 }
 
+variable "kms_key_arn" {
+  type        = string
+  description = "ARN da chave KMS já existente para usar no EKS"
+}
