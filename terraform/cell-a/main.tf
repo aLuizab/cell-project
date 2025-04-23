@@ -9,7 +9,7 @@ module "vpc_cell_a" {
 
 module "eks_cell_a" {
   source                = "../modules/eks"
-  cluster_name          = "eks-cell-a"
+  cluster_name          = "cell-a"
   cluster_version       = "1.29"
   vpc_id                = module.vpc_cell_a.vpc_id
   subnet_ids            = module.vpc_cell_a.private_subnet_ids
