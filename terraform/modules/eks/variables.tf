@@ -53,13 +53,3 @@ variable "cell_name" {
   description = "Nome da célula (A, B, etc)"
   type        = string
 }
-
-
-variable "encryption_config" {
-  type = list(object({
-    resources        = list(string)
-    provider_key_arn = string
-  }))
-  default = []
-  description = "Configuração de criptografia KMS para o cluster"
-}
