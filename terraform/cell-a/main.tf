@@ -19,5 +19,11 @@ module "eks_cell_a" {
   node_instance_type    = "t3.medium"
   cell_name             = "cell-a"
   kms_key_arn           = "arn:aws:kms:us-east-2:931157493096:key/34a394e3-fafd-4b7f-a1ba-2fc8a77ed4e7"
+  encryption_config = [
+    {
+      resources        = ["secrets"]
+      provider_key_arn = "arn:aws:kms:us-east-2:931157493096:key/34a394e3-fafd-4b7f-a1ba-2fc8a77ed4e7"
+    }
+  ]
 }
 
