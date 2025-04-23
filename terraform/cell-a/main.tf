@@ -18,5 +18,6 @@ module "eks_cell_as" {
   node_min_capacity     = 1
   node_instance_type    = "t3.medium"
   cell_name             = "cell-as"
+  kms_key_arn = "arn:aws:kms:us-east-2:931157493096:key/34a394e3-fafd-4b7f-a1ba-2fc8a77ed4e7"
 }
 
