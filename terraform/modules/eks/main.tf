@@ -20,15 +20,6 @@ module "eks" {
   enable_cluster_creator_admin_permissions = true
   create_kms_key                           = false
 
-
-  encryption_config = {
-    provider = {
-      key_arn = var.kms_key_arn   
-    }
-    resources = ["secrets"]           
-            
-  }
-
   cluster_addons = {
     aws-ebs-csi-driver = {
       service_account_role_arn = module.irsa-ebs-csi.iam_role_arn
