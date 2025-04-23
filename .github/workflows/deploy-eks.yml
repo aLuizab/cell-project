@@ -11,7 +11,87 @@ on:
       - 'terraform/.github/workflows/deploy-eks.yml'
 
 jobs:
-  deploy:
+  deploy-cell-a-1:
+    name: Deploy Cell A (us-east-1)
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_REGION: us-east-1
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v3
+
+      - name: Configurar AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Instalar Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.6
+
+      - name: Inicializar Terraform
+        working-directory: terraform/cell-a
+        run: terraform init -upgrade
+
+      - name: Validar Terraform
+        working-directory: terraform/cell-a
+        run: terraform validate
+
+      - name: Plano Terraform
+        working-directory: terraform/cell-a
+        run: terraform plan -out=tfplan
+
+      - name: Aplicar Terraform
+        working-directory: terraform/cell-a
+        run: terraform apply -auto-approve tfplan
+
+  deploy-cell-b-1:
+    name: Deploy Cell B (us-east-1)
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_REGION: us-east-1
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v3
+
+      - name: Configurar AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Instalar Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.6
+
+      - name: Inicializar Terraform
+        working-directory: terraform/cell-b
+        run: terraform init -upgrade
+
+      - name: Validar Terraform
+        working-directory: terraform/cell-b
+        run: terraform validate
+
+      - name: Plano Terraform
+        working-directory: terraform/cell-b
+        run: terraform plan -out=tfplan
+
+      - name: Aplicar Terraform
+        working-directory: terraform/cell-b
+        run: terraform apply -auto-approve tfplan
+
+
+  deploy-cell-a-2:
+    name: Deploy Cell A (us-east-2)
     runs-on: ubuntu-latest
 
     env:
@@ -47,4 +127,43 @@ jobs:
 
       - name: Aplicar Terraform
         working-directory: terraform/cell-a
+        run: terraform apply -auto-approve tfplan
+
+  deploy-cell-b-2:
+    name: Deploy Cell B (us-east-2)
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_REGION: us-east-2
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v3
+
+      - name: Configurar AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Instalar Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.6
+
+      - name: Inicializar Terraform
+        working-directory: terraform/cell-b
+        run: terraform init -upgrade
+
+      - name: Validar Terraform
+        working-directory: terraform/cell-b
+        run: terraform validate
+
+      - name: Plano Terraform
+        working-directory: terraform/cell-b
+        run: terraform plan -out=tfplan
+
+      - name: Aplicar Terraform
+        working-directory: terraform/cell-b
         run: terraform apply -auto-approve tfplan
