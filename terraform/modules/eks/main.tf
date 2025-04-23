@@ -20,24 +20,30 @@ module "eks" {
   enable_cluster_creator_admin_permissions = true
   create_kms_key                           = false
 
+
+  encryption_config = {
+    resources        = ["secrets"]           
+    provider_key_arn = var.kms_key_arn           
+  }
+
   cluster_addons = {
     aws-ebs-csi-driver = {
       service_account_role_arn = module.irsa-ebs-csi.iam_role_arn
     }
   }
 
-vpc_id     = var.vpc_id
-  subnet_ids = var.subnet_ids
+  vpc_id     = var.vpc_id
+    subnet_ids = var.subnet_ids
 
 
-eks_managed_node_groups = {
-    default = {
-      desired_capacity = var.node_desired_capacity
-      max_capacity     = var.node_max_capacity
-      min_capacity     = var.node_min_capacity
-      instance_types   = [var.node_instance_type]
+  eks_managed_node_groups = {
+      default = {
+        desired_capacity = var.node_desired_capacity
+        max_capacity     = var.node_max_capacity
+        min_capacity     = var.node_min_capacity
+        instance_types   = [var.node_instance_type]
+      }
     }
-  }
 }
 
 # The Amazon Elastic Block Store (Amazon EBS) Container Storage Interface (CSI) driver manages the lifecycle of Amazon EBS volumes as storage for the Kubernetes Volumes that you create.
