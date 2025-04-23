@@ -18,10 +18,21 @@ module "eks" {
 
   bootstrap_self_managed_addons = false
   cluster_addons = {
-    coredns                = {}
-    eks-pod-identity-agent = {}
-    kube-proxy             = {}
-    vpc-cni                = {}
+    coredns = {
+      resolve_conflicts_on_create = "OVERWRITE"
+      addon_version               = "v1.10.1-eksbuild.3"
+
+      timeouts = {
+        create = "25m"
+        delete = "10m"
+      }
+    }
+    kube-proxy = {
+      most_recent = true
+    }
+    vpc-cni = {
+      addon_version = "v1.14.1-eksbuild.1"
+    }
   }
 
   # Optional
