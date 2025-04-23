@@ -55,7 +55,11 @@ variable "cell_name" {
 }
 
 
-variable "kms_key_arn" {
-  type        = string
-  description = "ARN da chave KMS já existente"
+variable "encryption_config" {
+  type = list(object({
+    resources        = list(string)
+    provider_key_arn = string
+  }))
+  default = []
+  description = "Configuração de criptografia KMS para o cluster"
 }
