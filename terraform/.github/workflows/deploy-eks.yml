@@ -5,10 +5,10 @@ on:
     branches:
       - main
     paths:
-      - 'modules/eks/**'
-      - 'cell-a/**'
-      - 'cell-b/**'
-      - '.github/workflows/deploy-eks.yml'
+      - 'terraform/modules/eks/**'
+      - 'terraform/cell-a/**'
+      - 'terraform/cell-b/**'
+      - 'terraform/.github/workflows/deploy-eks.yml'
 
 jobs:
   deploy:
