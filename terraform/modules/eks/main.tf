@@ -22,7 +22,7 @@ module "eks" {
 
 
   encryption_config = {
-    provider {
+    provider = {
       key_arn = var.kms_key_arn   
     }
     resources = ["secrets"]           
