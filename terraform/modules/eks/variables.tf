@@ -53,3 +53,9 @@ variable "cell_name" {
   description = "Nome da célula (A, B, etc)"
   type        = string
 }
+
+
+variable "kms_key_arn" {
+  type        = string
+  description = "ARN da chave KMS já existente"
+}
