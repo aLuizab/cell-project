@@ -8,6 +8,7 @@ data "aws_availability_zones" "available" {
     values = ["opt-in-not-required"]
   }
 }
+
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "20.8.5"
@@ -15,8 +16,14 @@ module "eks" {
   cluster_name    = var.cluster_name
   cluster_version = "1.29"
 
+  encryption_config = {
+    resources        = ["secrets"]
+    provider_key_arn = var.kms_key_arn 
+  }
+
   cluster_endpoint_public_access           = true
   enable_cluster_creator_admin_permissions = true
+  create_kms_key                           = false
 
   cluster_addons = {
     aws-ebs-csi-driver = {
