@@ -5,11 +5,10 @@ module "eks" {
  cluster_name    = var.cluster_name
  cluster_version = "1.31"
 
- # Optional
  cluster_endpoint_public_access = true
-
- # Optional: Adds the current caller identity as an administrator via cluster access entry
  enable_cluster_creator_admin_permissions = true
+ create_cni_ipv6_iam_policy = true
+ iam_role_attach_cni_policy = true 
 
  eks_managed_node_groups = {
    default = {
