@@ -8,7 +8,6 @@ module "eks" {
  cluster_endpoint_public_access = true
  enable_cluster_creator_admin_permissions = true
  create_cni_ipv6_iam_policy = true
- iam_role_attach_cni_policy = true 
 
  eks_managed_node_groups = {
    default = {
